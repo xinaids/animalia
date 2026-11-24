@@ -2,7 +2,7 @@
 
 Trabalho Final da disciplina de Linguagem de Programação · Ciência da Computação · IFRS Campus Ibirubá · 2026/2
 
-> 🚧 **Status:** somente a estrutura inicial do projeto (pastas e configuração). Telas e classes ainda não foram criadas; os itens marcados com `[ ]` serão implementados.
+> **Status:** autenticação e dashboard implementados. Os módulos de tutores, pets, serviços e agendamentos ainda serão criados.
 
 ## Integrantes
 
@@ -18,6 +18,9 @@ Permitir que o petshop cadastre tutores, pets e serviços e agende um ou mais se
 
 ## Principais funcionalidades (planejadas)
 
+- [x] **Login** (e-mail, senha, lembrar-me, logout)
+- [x] **Cadastro** de conta (nome, e-mail, senha com confirmação)
+- [x] **Dashboard** protegido com cartões de resumo
 - [ ] CRUD de **tutores** (com pesquisa)
 - [ ] CRUD de **pets** (com foto e pesquisa)
 - [ ] CRUD de **serviços** (nome, preço, duração, ativo/inativo)
@@ -25,7 +28,6 @@ Permitir que o petshop cadastre tutores, pets e serviços e agende um ou mais se
 - [ ] Concluir e cancelar agendamentos
 - [ ] Validação dos dados e mensagens de sucesso e erro
 - [ ] Listagem com pesquisa e filtros
-- [ ] _(extra)_ Login de funcionários, relatórios/dashboard, exportação de dados
 
 ## Tecnologias utilizadas
 
@@ -36,25 +38,41 @@ Permitir que o petshop cadastre tutores, pets e serviços e agende um ou mais se
 
 ## Estrutura do projeto
 
-Pastas previstas (as marcadas com `.gitkeep` estão vazias por enquanto):
-
 ```
 app/
 ├── Http/
-│   ├── Controllers/        # controllers
-│   └── Requests/           # validação dos formulários (Form Requests)
-├── Models/                 # entidades Eloquent
-├── Repositories/           # acesso a dados
-└── Services/               # regras de negócio
+│   ├── Controllers/
+│   │   ├── AutenticacaoController.php   # login e logout
+│   │   ├── CadastroController.php       # criação de conta
+│   │   └── DashboardController.php
+│   └── Requests/
+│       ├── LoginRequest.php             # validação do formulário de login
+│       └── CadastroRequest.php          # validação do formulário de cadastro
+├── Models/
+│   └── User.php
+├── Repositories/           # (a usar nos próximos módulos)
+└── Services/
+    └── CadastroService.php              # criação do usuário no banco
 database/
-├── migrations/             # esquema do banco (persistência)
-└── seeders/                # dados iniciais
-resources/views/            # views Blade
-├── layouts/                # layout base
-├── partials/               # trechos reutilizáveis (alertas, formulários)
-└── tutores/ pets/ servicos/ agendamentos/   # uma pasta por módulo
-routes/web.php              # rotas
-public/css/                 # identidade visual
+├── migrations/             # esquema do banco
+└── seeders/
+resources/views/
+├── layouts/
+│   ├── principal.blade.php   # com navbar (usuário autenticado)
+│   └── visitante.blade.php   # sem navbar (login e cadastro)
+├── partials/
+│   └── alertas.blade.php     # mensagens flash de sucesso e erro
+├── autenticacao/
+│   ├── login.blade.php
+│   └── cadastro.blade.php
+├── dashboard/
+│   └── index.blade.php
+└── tutores/ pets/ servicos/ agendamentos/   # (a implementar)
+routes/web.php              # rotas de autenticação e dashboard
+public/css/
+└── animalia.css            # identidade visual
+tests/Feature/
+└── AutenticacaoTest.php    # testes de login, cadastro, dashboard e logout
 docs/                       # diagrama de classes e prints das telas
 ```
 
@@ -100,7 +118,13 @@ Relacionamentos: **Tutor 1—N Pet**, **Pet 1—N Agendamento** e **Agendamento 
 
 ## Prints das principais telas
 
-_(adicionar em `docs/imagens/` e referenciar aqui)_
+_(adicionar prints em `docs/imagens/` após rodar o projeto)_
+
+| Tela | Print |
+|------|-------|
+| Login | _(pendente)_ |
+| Cadastro | _(pendente)_ |
+| Dashboard | _(pendente)_ |
 
 ## Diagrama de classes
 
