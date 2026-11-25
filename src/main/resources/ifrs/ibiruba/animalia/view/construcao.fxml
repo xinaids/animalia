@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ifrs.ibiruba.animalia.controller.ConstrucaoController"
+      alignment="CENTER"
+      spacing="16"
+      styleClass="root"
+      stylesheets="@../css/animalia.css">
+
+    <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
+
+    <Label text="Em construção" styleClass="titulo"/>
+    <Label text="Esta funcionalidade será implementada na próxima etapa."
+           style="-fx-text-fill:#6c757d;" wrapText="true"/>
+    <Button fx:id="voltarButton" text="Voltar ao Dashboard" onAction="#voltar" styleClass="btn-primary"/>
+</VBox>

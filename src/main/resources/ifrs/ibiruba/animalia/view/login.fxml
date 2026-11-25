@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ifrs.ibiruba.animalia.controller.LoginController"
+      alignment="CENTER"
+      spacing="0"
+      styleClass="root"
+      stylesheets="@../css/animalia.css">
+
+    <VBox alignment="CENTER" spacing="8" VBox.vgrow="ALWAYS">
+        <padding><Insets top="40" right="60" bottom="20" left="60"/></padding>
+
+        <Label text="Animalia" styleClass="titulo" style="-fx-font-size:28px;"/>
+        <Label text="Sistema de Agendamento para Petshop"
+               style="-fx-text-fill:#6c757d; -fx-font-size:12px;"/>
+
+        <VBox spacing="12" style="-fx-background-color:white; -fx-padding:28; -fx-border-radius:8; -fx-background-radius:8;"
+              maxWidth="320">
+            <padding><Insets top="20"/></padding>
+
+            <Label text="E-mail" style="-fx-font-weight:bold;"/>
+            <TextField fx:id="emailField" promptText="seu@email.com"/>
+
+            <Label text="Senha" style="-fx-font-weight:bold;"/>
+            <PasswordField fx:id="senhaField" promptText="Senha"/>
+
+            <Label fx:id="mensagemLabel" styleClass="mensagem-erro" wrapText="true"/>
+
+            <Button fx:id="entrarButton" text="Entrar" onAction="#entrar"
+                    styleClass="btn-primary" maxWidth="Infinity"/>
+
+            <HBox alignment="CENTER" spacing="8">
+                <Hyperlink fx:id="criarContaLink" text="Criar conta" onAction="#criarConta"/>
+                <Label text="·" style="-fx-text-fill:#adb5bd;"/>
+                <Hyperlink fx:id="esqueceuSenhaLink" text="Esqueci a senha" onAction="#esqueceuSenha"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</VBox>

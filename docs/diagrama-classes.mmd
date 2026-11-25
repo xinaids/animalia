@@ -1,0 +1,68 @@
+classDiagram
+    class Usuario {
+        +Long id
+        +String nome
+        +String email
+        +String senhaHash
+        +String salt
+        +String codigoRecuperacaoHash
+        +String saltRecuperacao
+    }
+
+    class Tutor {
+        +Long id
+        +String nome
+        +String cpf
+        +String telefone
+        +String email
+        +List~Pet~ pets
+    }
+
+    class Pet {
+        +Long id
+        +String nome
+        +String especie
+        +String raca
+        +LocalDate dataNascimento
+        +Tutor tutor
+        +List~Agendamento~ agendamentos
+    }
+
+    class Servico {
+        +Long id
+        +String nome
+        +String descricao
+        +BigDecimal preco
+        +int duracaoMinutos
+        +boolean ativo
+    }
+
+    class Agendamento {
+        +Long id
+        +Pet pet
+        +LocalDateTime dataHora
+        +StatusAgendamento status
+        +String observacoes
+        +BigDecimal valorTotal
+        +List~ItemAgendamento~ itens
+    }
+
+    class ItemAgendamento {
+        +Long id
+        +Agendamento agendamento
+        +Servico servico
+        +BigDecimal precoCobrado
+    }
+
+    class StatusAgendamento {
+        <<enumeration>>
+        AGENDADO
+        CONCLUIDO
+        CANCELADO
+    }
+
+    Tutor "1" --> "0..*" Pet : possui
+    Pet "1" --> "0..*" Agendamento : tem
+    Agendamento "1" --> "1..*" ItemAgendamento : contém
+    ItemAgendamento "0..*" --> "1" Servico : referencia
+    Agendamento --> StatusAgendamento : usa

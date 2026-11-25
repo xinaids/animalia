@@ -1,0 +1,105 @@
+/* ───── Base ───── */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #f4f9f8;
+}
+
+/* ───── Botões ───── */
+.btn-primary {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #1f7a6e;
+}
+
+.btn-primary:disabled {
+    -fx-background-color: #9ececa;
+    -fx-opacity: 0.8;
+}
+
+/* ───── Tipografia ───── */
+.titulo {
+    -fx-text-fill: #264653;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.mensagem-erro {
+    -fx-text-fill: #dc3545;
+    -fx-font-size: 12px;
+}
+
+/* ───── Cards ───── */
+.card {
+    -fx-background-color: white;
+    -fx-border-color: #2a9d8f transparent transparent transparent;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-style: solid;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 6, 0, 0, 1);
+    -fx-background-radius: 4;
+}
+
+.card-titulo {
+    -fx-text-fill: #264653;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.card-valor {
+    -fx-text-fill: #2a9d8f;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+/* ───── Sidebar ───── */
+.sidebar {
+    -fx-background-color: #264653;
+}
+
+.sidebar-btn {
+    -fx-text-fill: rgba(255,255,255,0.85);
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.sidebar-btn:hover {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+}
+
+/* ───── TextField e PasswordField ───── */
+.text-field, .password-field {
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8 10;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2a9d8f;
+}
+
+/* ───── Hyperlink ───── */
+.hyperlink {
+    -fx-text-fill: #2a9d8f;
+    -fx-border-color: transparent;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #1f7a6e;
+}
+
+/* ───── Destaque ───── */
+.destaque {
+    -fx-text-fill: #e9c46a;
+}

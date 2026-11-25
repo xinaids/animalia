@@ -1,184 +1,134 @@
-# Animalia — Sistema de agendamento para petshop
+# Animalia — Sistema de Agendamento para Petshop
 
-Trabalho Final da disciplina de Linguagem de Programação · Ciência da Computação · IFRS Campus Ibirubá · 2026/2
-
-> **Status:** autenticação e dashboard implementados. Os módulos de tutores, pets, serviços e agendamentos ainda serão criados.
-
-## Integrantes
-
-_(a definir)_
+Trabalho Final de Linguagem de Programação III — IFRS Campus Ibirubá, 2026/2.
 
 ## Descrição do problema
 
-_(rascunho — revisar)_ Petshops de pequeno porte costumam controlar os horários de banho, tosa e consultas em cadernos ou mensagens avulsas. Isso gera conflitos de horário, perda de informação sobre os pets e dificuldade para saber o que foi feito e quanto foi cobrado.
+Petshops gerenciam agendamentos de serviços (banho, tosa, consulta) para seus clientes (tutores) e seus animais (pets). O controle manual por telefone ou papel gera erros de horário, perda de histórico e dificuldade de consulta. Este sistema resolve esse problema com uma aplicação desktop simples.
 
-## Objetivo da aplicação
+## Objetivo
 
-Permitir que o petshop cadastre tutores, pets e serviços e agende um ou mais serviços para um pet em determinada data e hora, acompanhando o atendimento até a conclusão ou o cancelamento e o valor total de cada agendamento.
+Desenvolver uma aplicação desktop para controle de agendamentos de serviços de petshop, cobrindo cadastro de tutores, pets e serviços, geração de agendamentos e visualização de estatísticas básicas.
 
-## Principais funcionalidades (planejadas)
+## Integrantes
 
-- [x] **Login** (e-mail, senha, lembrar-me, logout)
-- [x] **Cadastro** de conta (nome, e-mail, senha com confirmação)
-- [x] **Dashboard** protegido com cartões de resumo
-- [ ] CRUD de **tutores** (com pesquisa)
-- [ ] CRUD de **pets** (com foto e pesquisa)
-- [ ] CRUD de **serviços** (nome, preço, duração, ativo/inativo)
-- [ ] **Agendamento** de um ou mais serviços para um pet (fluxo principal), com total calculado
-- [ ] Concluir e cancelar agendamentos
-- [ ] Validação dos dados e mensagens de sucesso e erro
-- [ ] Listagem com pesquisa e filtros
+> A definir
 
-## Tecnologias utilizadas
+## Funcionalidades
 
-- PHP 8.3+ e [Laravel](https://laravel.com) 13
-- SQLite (Eloquent ORM + migrations)
-- Blade, Bootstrap 5 e CSS próprio
-- Git e GitHub
+### Implementado neste marco
+- [x] Banco de dados SQLite com todas as entidades (Usuario, Tutor, Pet, Serviço, Agendamento, ItemAgendamento)
+- [x] Criação automática das tabelas ao iniciar a aplicação
+- [x] Autenticação com PBKDF2 + salt (sem senha em log ou texto puro no banco)
+- [x] Cadastro de usuário com validação e código de recuperação único
+- [x] Login com mensagem genérica (não revela se foi e-mail ou senha errada)
+- [x] Recuperação de senha por código, com limite de 5 tentativas por sessão
+- [x] Tela de login, cadastro e recuperação de senha (JavaFX + FXML)
+- [x] Dashboard com contagens reais do banco ligadas por bindings
+- [x] Navegação entre telas e sessão de usuário
+- [x] CSS com identidade visual teal/escuro/amarelo
+
+### Próxima etapa
+- [ ] CRUD de Tutores
+- [ ] CRUD de Pets
+- [ ] CRUD de Serviços
+- [ ] Fluxo de agendamento (criar, editar, cancelar, concluir)
+- [ ] Dashboard completo com filtros por período
+
+## Tecnologias
+
+| Tecnologia            | Versão   | Finalidade                        |
+|-----------------------|----------|-----------------------------------|
+| Java                  | 21+      | Linguagem                         |
+| JavaFX                | 21       | Interface gráfica desktop         |
+| FXML                  | —        | Descrição declarativa das telas   |
+| Hibernate ORM         | 6.6.4    | Mapeamento objeto-relacional      |
+| SQLite                | 3.46.1   | Banco de dados em arquivo         |
+| JUnit Jupiter         | 5.11.3   | Testes automatizados              |
+| Maven                 | 3.10.2   | Build e dependências              |
 
 ## Estrutura do projeto
 
 ```
-app/
-├── Http/
-│   ├── Controllers/
-│   │   ├── AutenticacaoController.php   # login e logout
-│   │   ├── CadastroController.php       # criação de conta
-│   │   └── DashboardController.php
-│   └── Requests/
-│       ├── LoginRequest.php             # validação do formulário de login
-│       └── CadastroRequest.php          # validação do formulário de cadastro
-├── Models/
-│   └── User.php
-├── Repositories/           # (a usar nos próximos módulos)
-└── Services/
-    └── CadastroService.php              # criação do usuário no banco
-database/
-├── migrations/             # esquema do banco
-└── seeders/
-resources/views/
-├── layouts/
-│   ├── principal.blade.php   # com navbar (usuário autenticado)
-│   └── visitante.blade.php   # sem navbar (login e cadastro)
-├── partials/
-│   └── alertas.blade.php     # mensagens flash de sucesso e erro
-├── autenticacao/
-│   ├── login.blade.php
-│   └── cadastro.blade.php
-├── dashboard/
-│   └── index.blade.php
-└── tutores/ pets/ servicos/ agendamentos/   # (a implementar)
-routes/web.php              # rotas de autenticação e dashboard
-public/css/
-└── animalia.css            # identidade visual
-tests/Feature/
-└── AutenticacaoTest.php    # testes de login, cadastro, dashboard e logout
-docs/                       # diagrama de classes e prints das telas
+animalia/
+├── src/
+│   ├── main/
+│   │   ├── java/ifrs/ibiruba/animalia/
+│   │   │   ├── App.java                    Ponto de entrada JavaFX
+│   │   │   ├── controller/                 Controllers das telas FXML
+│   │   │   ├── model/                      Entidades JPA
+│   │   │   ├── repository/                 Acesso ao banco (BaseRepository + concretos)
+│   │   │   ├── service/                    Regras de negócio
+│   │   │   ├── persistencia/               EMF singleton, RepositorioException
+│   │   │   └── util/                       SenhaUtil, Sessao, Navegacao, ValidacaoUtil
+│   │   └── resources/
+│   │       ├── META-INF/persistence.xml    Configuração JPA
+│   │       └── ifrs/ibiruba/animalia/
+│   │           ├── view/                   Arquivos FXML
+│   │           └── css/animalia.css        Estilo JavaFX
+│   └── test/java/ifrs/ibiruba/animalia/   Testes JUnit 5
+├── docs/
+│   ├── diagrama-classes.mmd               Fonte Mermaid
+│   └── diagrama-classes.png               Diagrama gerado
+├── pom.xml
+└── README.md
 ```
 
-## Como configurar e executar
+## Configurar e executar
 
-Requisitos: **PHP 8.3+** (com as extensões `pdo_sqlite`, `mbstring`, `xml`, `fileinfo`) e **Composer**.
+### Pré-requisitos
+- Java 21 ou superior
+- Maven (ou usar o wrapper incluso `.\mvnw.cmd`)
 
-```bash
-git clone <url-do-repositorio>
-cd animalia
+### Executar a aplicação
+```
+.\mvnw.cmd javafx:run
+```
+> O banco `animalia.db` é criado automaticamente na pasta raiz do projeto.
 
-composer install
-
-cp .env.example .env              # Windows (cmd): copy .env.example .env
-php artisan key:generate
-
-touch database/database.sqlite    # Windows (cmd): type nul > database\database.sqlite
-php artisan migrate --seed
-php artisan storage:link          # necessário para as fotos dos pets
-
-php artisan serve
+### Rodar os testes
+```
+.\mvnw.cmd clean test
 ```
 
-A aplicação ficará disponível em <http://localhost:8000>.
-
-Testes: `php artisan test`
+### Gerar o JAR
+```
+.\mvnw.cmd clean package -DskipTests
+```
 
 ## Banco de dados
 
-SQLite, em `database/database.sqlite` (arquivo criado localmente, **não** versionado). A conexão é configurada em `.env` (`DB_CONNECTION=sqlite`) e `config/database.php`.
+### Tabelas e relacionamentos
 
-Modelo planejado:
+| Tabela             | Descrição                                                                       |
+|--------------------|---------------------------------------------------------------------------------|
+| `usuarios`         | Usuários do sistema (login, hash de senha, código de recuperação)               |
+| `tutores`          | Proprietários dos animais                                                       |
+| `pets`             | Animais (N:1 com tutores)                                                       |
+| `servicos`         | Serviços disponíveis (banho, tosa etc.)                                         |
+| `agendamentos`     | Agendamentos de serviços para pets (N:1 com pets)                               |
+| `itens_agendamento`| Itens de um agendamento — serviço e preço cobrado (N:1 com agendamento e serviço) |
 
-| Tabela                | Descrição                                              |
-|-----------------------|--------------------------------------------------------|
-| `tutores`             | donos dos pets                                         |
-| `pets`                | animais atendidos (pertencem a um tutor)               |
-| `servicos`            | serviços oferecidos e seus preços                      |
-| `agendamentos`        | agendamento de um pet em uma data/hora, com status     |
-| `agendamento_servico` | serviços de cada agendamento (com o preço cobrado)     |
-
-Relacionamentos: **Tutor 1—N Pet**, **Pet 1—N Agendamento** e **Agendamento N—N Servico**.
-
-## Prints das principais telas
-
-_(adicionar prints em `docs/imagens/` após rodar o projeto)_
-
-| Tela | Print |
-|------|-------|
-| Login | _(pendente)_ |
-| Cadastro | _(pendente)_ |
-| Dashboard | _(pendente)_ |
+**Relacionamentos:**
+- Tutor `1 → N` Pet
+- Pet `1 → N` Agendamento
+- Agendamento `1 → N` ItemAgendamento
+- ItemAgendamento `N → 1` Serviço
 
 ## Diagrama de classes
 
-> TODO: exportar o diagrama para `docs/diagrama-classes.png`, referenciá-lo com
-> `![Diagrama de classes](docs/diagrama-classes.png)` e mantê-lo atualizado conforme a implementação.
-> O diagrama abaixo é a proposta inicial.
+![Diagrama de classes](./docs/diagrama-classes.png)
 
-```mermaid
-classDiagram
-    class Tutor {
-        +int id
-        +string nome
-        +string cpf
-        +string telefone
-        +string email
-    }
-    class Pet {
-        +int id
-        +int tutor_id
-        +string nome
-        +string especie
-        +string raca
-        +date data_nascimento
-        +string foto
-    }
-    class Servico {
-        +int id
-        +string nome
-        +string descricao
-        +decimal preco
-        +int duracao_minutos
-        +bool ativo
-    }
-    class Agendamento {
-        +int id
-        +int pet_id
-        +datetime data_hora
-        +StatusAgendamento status
-        +string observacoes
-        +decimal valor_total
-    }
-    class StatusAgendamento {
-        <<enumeration>>
-        Agendado
-        Concluido
-        Cancelado
-    }
+Fonte Mermaid: [`docs/diagrama-classes.mmd`](./docs/diagrama-classes.mmd)
 
-    Tutor "1" --> "0..*" Pet : possui
-    Pet "1" --> "0..*" Agendamento : tem
-    Agendamento "0..*" --> "1..*" Servico : inclui (preco_cobrado)
-    Agendamento --> StatusAgendamento
-```
+## Prints das telas
 
-## Vídeo de apresentação
+> _A preencher — adicionar capturas de tela após executar `.\mvnw.cmd javafx:run`._
 
-_(link do YouTube, não listado, a ser adicionado)_
+## Vídeo de demonstração
+
+> _A preencher — link do vídeo._
+
+## Repositório
+
+> _A preencher — link do repositório._

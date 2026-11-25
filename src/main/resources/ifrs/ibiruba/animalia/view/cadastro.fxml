@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ifrs.ibiruba.animalia.controller.CadastroController"
+      alignment="CENTER"
+      spacing="0"
+      styleClass="root"
+      stylesheets="@../css/animalia.css">
+
+    <VBox alignment="CENTER" spacing="4" VBox.vgrow="ALWAYS">
+        <padding><Insets top="30" right="60" bottom="20" left="60"/></padding>
+
+        <Label text="Criar conta" styleClass="titulo"/>
+
+        <VBox spacing="10" style="-fx-background-color:white; -fx-padding:28; -fx-border-radius:8; -fx-background-radius:8;"
+              maxWidth="340">
+            <padding><Insets top="12"/></padding>
+
+            <Label text="Nome" style="-fx-font-weight:bold;"/>
+            <TextField fx:id="nomeField" promptText="Seu nome completo"/>
+
+            <Label text="E-mail" style="-fx-font-weight:bold;"/>
+            <TextField fx:id="emailField" promptText="seu@email.com"/>
+
+            <Label text="Senha" style="-fx-font-weight:bold;"/>
+            <PasswordField fx:id="senhaField" promptText="Mínimo 8 caracteres"/>
+
+            <Label text="Confirmar senha" style="-fx-font-weight:bold;"/>
+            <PasswordField fx:id="confirmarSenhaField" promptText="Repita a senha"/>
+
+            <Label fx:id="mensagemLabel" styleClass="mensagem-erro" wrapText="true"/>
+
+            <Button fx:id="cadastrarButton" text="Criar conta" onAction="#cadastrar"
+                    styleClass="btn-primary" maxWidth="Infinity"/>
+
+            <HBox alignment="CENTER">
+                <Hyperlink fx:id="voltarLoginLink" text="Já tenho conta — Entrar" onAction="#voltarLogin"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</VBox>
