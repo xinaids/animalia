@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ifrs.ibiruba.animalia.controller.ServicoController"
+            stylesheets="@../css/animalia.css">
+
+    <!-- Módulo exibido na área central de principal.fxml -->
+
+    <!-- Lista de serviços -->
+    <center>
+        <VBox spacing="14">
+            <padding><Insets top="24" right="20" bottom="20" left="24"/></padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Serviços" styleClass="titulo"/>
+                    <Label fx:id="totalLabel" text="" styleClass="texto-secundario"/>
+                </VBox>
+                <Button fx:id="novoButton" text="+ Novo serviço" styleClass="btn-primary" onAction="#novo"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <TextField fx:id="buscaField" promptText="Buscar por nome ou descrição" HBox.hgrow="ALWAYS"/>
+                <CheckBox fx:id="mostrarInativosCheck" text="Mostrar inativos"/>
+            </HBox>
+
+            <TableView fx:id="tabela" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nomeColuna"      text="Nome"      prefWidth="160"/>
+                    <TableColumn fx:id="descricaoColuna" text="Descrição" prefWidth="180"/>
+                    <TableColumn fx:id="precoColuna"     text="Preço"     prefWidth="90"  styleClass="coluna-direita"/>
+                    <TableColumn fx:id="duracaoColuna"   text="Duração"   prefWidth="80"  styleClass="coluna-direita"/>
+                    <TableColumn fx:id="statusColuna"    text="Status"    prefWidth="70"/>
+                </columns>
+                <placeholder>
+                    <Label fx:id="vazioLabel" text="Nenhum serviço cadastrado." styleClass="texto-secundario"/>
+                </placeholder>
+            </TableView>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Button fx:id="editarButton"        text="Editar"    styleClass="btn-secundario" onAction="#editar"/>
+                <Button fx:id="alternarAtivoButton" text="Desativar" styleClass="btn-secundario" onAction="#alternarAtivo"/>
+                <Button fx:id="excluirButton"       text="Excluir"   styleClass="btn-perigo"     onAction="#excluir"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statusLabel" styleClass="mensagem-sucesso"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Formulário (aparece ao clicar em Novo / Editar) -->
+    <right>
+        <VBox fx:id="formPainel" styleClass="painel-form" spacing="8" prefWidth="290" minWidth="290"
+              visible="false" managed="false">
+            <padding><Insets top="24" right="20" bottom="20" left="20"/></padding>
+
+            <Label fx:id="formTituloLabel" text="Novo serviço" styleClass="titulo" style="-fx-font-size:16px;"/>
+
+            <Label text="Nome *" styleClass="rotulo"/>
+            <TextField fx:id="nomeField" promptText="Ex.: Banho e tosa"/>
+
+            <Label text="Descrição" styleClass="rotulo"/>
+            <TextArea fx:id="descricaoField" promptText="Opcional" wrapText="true" prefRowCount="3"/>
+
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Preço (R$) *" styleClass="rotulo"/>
+                    <TextField fx:id="precoField" promptText="59,90"/>
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Duração (min) *" styleClass="rotulo"/>
+                    <TextField fx:id="duracaoField" promptText="60"/>
+                </VBox>
+            </HBox>
+
+            <CheckBox fx:id="ativoCheck" text="Serviço ativo" selected="true">
+                <VBox.margin><Insets top="6"/></VBox.margin>
+            </CheckBox>
+
+            <Label fx:id="mensagemLabel" styleClass="mensagem-erro" wrapText="true"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="cancelarButton" text="Cancelar" styleClass="btn-secundario" onAction="#cancelar" cancelButton="true"/>
+                <Button fx:id="salvarButton"   text="Salvar"   styleClass="btn-primary"    onAction="#salvar"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>

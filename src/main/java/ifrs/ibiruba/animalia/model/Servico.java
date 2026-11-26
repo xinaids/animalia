@@ -2,6 +2,7 @@ package ifrs.ibiruba.animalia.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Table(name = "servicos")
@@ -29,7 +30,8 @@ public class Servico {
     public Long getId()              { return id; }
     public String getNome()          { return nome; }
     public String getDescricao()     { return descricao; }
-    public BigDecimal getPreco()     { return preco; }
+    /** O SQLite não preserva a escala decimal (35.00 volta como 35); normaliza para 2 casas. */
+    public BigDecimal getPreco()     { return preco == null ? null : preco.setScale(2, RoundingMode.HALF_UP); }
     public int getDuracaoMinutos()   { return duracaoMinutos; }
     public boolean isAtivo()         { return ativo; }
 

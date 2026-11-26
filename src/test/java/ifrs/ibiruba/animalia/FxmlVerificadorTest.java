@@ -22,12 +22,12 @@ class FxmlVerificadorTest {
 
     private static final String[] FXMLS = {
         "login.fxml", "cadastro.fxml", "recuperacao.fxml", "dashboard.fxml", "construcao.fxml",
-        "sidebar.fxml", "principal.fxml"
+        "sidebar.fxml", "servicos.fxml", "principal.fxml"
     };
 
     /** Módulos exibidos na área central não podem trazer menu ou sidebar próprios. */
     private static final String[] MODULOS_CENTRAIS = {
-        "dashboard.fxml", "construcao.fxml"
+        "dashboard.fxml", "servicos.fxml", "construcao.fxml"
     };
 
     @Test

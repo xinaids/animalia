@@ -10,7 +10,7 @@ public enum Modulo {
     AGENDAMENTOS ("construcao.fxml", "Agendamentos"),
     TUTORES      ("construcao.fxml", "Tutores"),
     PETS         ("construcao.fxml", "Pets"),
-    SERVICOS     ("construcao.fxml", "Serviços");
+    SERVICOS     ("servicos.fxml",   "Serviços");
 
     private final String fxml;
     private final String titulo;
