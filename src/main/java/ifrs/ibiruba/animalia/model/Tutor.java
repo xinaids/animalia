@@ -24,7 +24,8 @@ public class Tutor {
     @Column(length = 255)
     private String email;
 
-    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Sem cascade/orphanRemoval: a exclusão do tutor é bloqueada enquanto houver pets vinculados.
+    @OneToMany(mappedBy = "tutor")
     private List<Pet> pets = new ArrayList<>();
 
     public Long getId()          { return id; }
