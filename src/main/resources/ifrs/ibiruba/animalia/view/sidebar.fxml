@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ifrs.ibiruba.animalia.controller.SidebarController"
+      styleClass="sidebar" prefWidth="180" minWidth="180" spacing="2">
+    <padding><Insets top="20" bottom="20"/></padding>
+
+    <Label text="Animalia"
+           style="-fx-text-fill:#e9c46a; -fx-font-size:18px; -fx-font-weight:bold; -fx-padding:0 0 12 20;"/>
+
+    <Button fx:id="dashboardButton"    text="Dashboard"    styleClass="sidebar-btn" maxWidth="Infinity" onAction="#irDashboard"/>
+    <Button fx:id="agendamentosButton" text="Agendamentos" styleClass="sidebar-btn" maxWidth="Infinity" onAction="#irAgendamentos"/>
+    <Button fx:id="tutoresButton"      text="Tutores"      styleClass="sidebar-btn" maxWidth="Infinity" onAction="#irTutores"/>
+    <Button fx:id="petsButton"         text="Pets"         styleClass="sidebar-btn" maxWidth="Infinity" onAction="#irPets"/>
+    <Button fx:id="servicosButton"     text="Serviços"     styleClass="sidebar-btn" maxWidth="Infinity" onAction="#irServicos"/>
+
+    <VBox VBox.vgrow="ALWAYS"/>
+    <Button text="Sair" styleClass="sidebar-btn" maxWidth="Infinity" onAction="#sair"
+            style="-fx-text-fill:#e9c46a;"/>
+</VBox>

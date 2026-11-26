@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Janela principal da área logada: menu e sidebar fixos, módulos trocados em conteudoPane. -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ifrs.ibiruba.animalia.controller.PrincipalController"
+            styleClass="root"
+            stylesheets="@../css/animalia.css">
+
+    <top>
+        <MenuBar>
+            <Menu text="Sistema">
+                <MenuItem text="Dashboard" onAction="#irDashboard"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Sair" onAction="#sair"/>
+            </Menu>
+            <Menu text="Cadastros">
+                <MenuItem text="Tutores"  onAction="#irTutores"/>
+                <MenuItem text="Pets"     onAction="#irPets"/>
+                <MenuItem text="Serviços" onAction="#irServicos"/>
+            </Menu>
+            <Menu text="Operações">
+                <MenuItem text="Agendamentos" onAction="#irAgendamentos"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <StackPane fx:id="conteudoPane"/>
+    </center>
+</BorderPane>

@@ -1,5 +1,6 @@
 package ifrs.ibiruba.animalia;
 
+import ifrs.ibiruba.animalia.util.Modulo;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.*;
 
@@ -20,8 +21,47 @@ import static org.junit.jupiter.api.Assertions.*;
 class FxmlVerificadorTest {
 
     private static final String[] FXMLS = {
-        "login.fxml", "cadastro.fxml", "recuperacao.fxml", "dashboard.fxml", "construcao.fxml"
+        "login.fxml", "cadastro.fxml", "recuperacao.fxml", "dashboard.fxml", "construcao.fxml",
+        "sidebar.fxml", "principal.fxml"
     };
+
+    /** Módulos exibidos na área central não podem trazer menu ou sidebar próprios. */
+    private static final String[] MODULOS_CENTRAIS = {
+        "dashboard.fxml", "construcao.fxml"
+    };
+
+    @Test
+    void todoModuloApontaParaFxmlExistente() {
+        for (Modulo m : Modulo.values()) {
+            assertNotNull(getClass().getResource("/ifrs/ibiruba/animalia/view/" + m.getFxml()),
+                "Módulo " + m + " aponta para FXML inexistente: " + m.getFxml());
+        }
+    }
+
+    @Test
+    void modulosNaoDuplicamMenuNemSidebar() throws Exception {
+        for (String fxml : MODULOS_CENTRAIS) {
+            try (InputStream is = getClass().getResourceAsStream("/ifrs/ibiruba/animalia/view/" + fxml)) {
+                assertNotNull(is, fxml);
+                Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+                assertEquals(0, doc.getElementsByTagName("MenuBar").getLength(),
+                    fxml + " não deve ter MenuBar própria (ela fica em principal.fxml)");
+                assertEquals(0, doc.getElementsByTagName("fx:include").getLength(),
+                    fxml + " não deve incluir a sidebar (ela fica em principal.fxml)");
+            }
+        }
+    }
+
+    @Test
+    void nenhumMenuDaJanelaPrincipalFicaEmConstrucao() throws Exception {
+        for (String fxml : new String[] {"principal.fxml", "sidebar.fxml"}) {
+            try (InputStream is = getClass().getResourceAsStream("/ifrs/ibiruba/animalia/view/" + fxml)) {
+                String conteudo = new String(is.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
+                assertFalse(conteudo.contains("#emConstrucao"),
+                    fxml + " deve navegar por Modulo, não por #emConstrucao");
+            }
+        }
+    }
 
     @Test
     void todosOsFxmlsExistem() {

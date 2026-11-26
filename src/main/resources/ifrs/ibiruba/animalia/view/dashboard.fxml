@@ -3,90 +3,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ifrs.ibiruba.animalia.controller.DashboardController"
-            styleClass="root"
-            stylesheets="@../css/animalia.css">
+<!-- Módulo exibido na área central de principal.fxml -->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ifrs.ibiruba.animalia.controller.DashboardController"
+      spacing="24"
+      stylesheets="@../css/animalia.css">
+    <padding><Insets top="28" right="32" bottom="28" left="32"/></padding>
 
-    <!-- Menu superior -->
-    <top>
-        <MenuBar>
-            <Menu text="Sistema">
-                <MenuItem text="Dashboard"/>
-                <SeparatorMenuItem/>
-                <MenuItem fx:id="menuSair" text="Sair" onAction="#sair"/>
-            </Menu>
-            <Menu text="Cadastros">
-                <MenuItem text="Tutores"   onAction="#emConstrucao"/>
-                <MenuItem text="Pets"      onAction="#emConstrucao"/>
-                <MenuItem text="Serviços"  onAction="#emConstrucao"/>
-            </Menu>
-            <Menu text="Operações">
-                <MenuItem text="Agendamentos" onAction="#emConstrucao"/>
-            </Menu>
-        </MenuBar>
-    </top>
+    <VBox spacing="4">
+        <Label fx:id="saudacaoLabel" text="Bem-vindo!" styleClass="titulo"/>
+        <Label text="Resumo do sistema" style="-fx-text-fill:#6c757d;"/>
+    </VBox>
 
-    <!-- Sidebar esquerda -->
-    <left>
-        <VBox styleClass="sidebar" prefWidth="180" spacing="2">
-            <padding><Insets top="20" bottom="20"/></padding>
-
-            <Label text="Animalia"
-                   style="-fx-text-fill:#e9c46a; -fx-font-size:18px; -fx-font-weight:bold; -fx-padding:0 0 12 20;"/>
-
-            <Button text="Dashboard"    styleClass="sidebar-btn" maxWidth="Infinity"/>
-            <Button text="Agendamentos" styleClass="sidebar-btn" maxWidth="Infinity" onAction="#emConstrucao"/>
-            <Button text="Tutores"      styleClass="sidebar-btn" maxWidth="Infinity" onAction="#emConstrucao"/>
-            <Button text="Pets"         styleClass="sidebar-btn" maxWidth="Infinity" onAction="#emConstrucao"/>
-            <Button text="Serviços"     styleClass="sidebar-btn" maxWidth="Infinity" onAction="#emConstrucao"/>
-
-            <VBox VBox.vgrow="ALWAYS"/>
-            <Button text="Sair" styleClass="sidebar-btn" maxWidth="Infinity" onAction="#sair"
-                    style="-fx-text-fill:#e9c46a;"/>
+    <!-- Cards de contagem -->
+    <HBox spacing="20">
+        <!-- Agendamentos hoje -->
+        <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
+            <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+            <Label text="Agendamentos hoje" styleClass="card-titulo"/>
+            <Label fx:id="agendamentosHojeLabel" text="0" styleClass="card-valor"/>
         </VBox>
-    </left>
 
-    <!-- Conteúdo principal -->
-    <center>
-        <VBox spacing="24">
-            <padding><Insets top="28" right="32" bottom="28" left="32"/></padding>
-
-            <VBox spacing="4">
-                <Label fx:id="saudacaoLabel" text="Bem-vindo!" styleClass="titulo"/>
-                <Label text="Resumo do sistema" style="-fx-text-fill:#6c757d;"/>
-            </VBox>
-
-            <!-- Cards de contagem -->
-            <HBox spacing="20">
-                <!-- Agendamentos hoje -->
-                <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
-                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
-                    <Label text="Agendamentos hoje" styleClass="card-titulo"/>
-                    <Label fx:id="agendamentosHojeLabel" text="0" styleClass="card-valor"/>
-                </VBox>
-
-                <!-- Tutores -->
-                <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
-                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
-                    <Label text="Tutores cadastrados" styleClass="card-titulo"/>
-                    <Label fx:id="tutoresLabel" text="0" styleClass="card-valor"/>
-                </VBox>
-
-                <!-- Pets -->
-                <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
-                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
-                    <Label text="Pets cadastrados" styleClass="card-titulo"/>
-                    <Label fx:id="petsLabel" text="0" styleClass="card-valor"/>
-                </VBox>
-
-                <!-- Serviços ativos -->
-                <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
-                    <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
-                    <Label text="Serviços ativos" styleClass="card-titulo"/>
-                    <Label fx:id="servicosAtivosLabel" text="0" styleClass="card-valor"/>
-                </VBox>
-            </HBox>
+        <!-- Tutores -->
+        <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
+            <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+            <Label text="Tutores cadastrados" styleClass="card-titulo"/>
+            <Label fx:id="tutoresLabel" text="0" styleClass="card-valor"/>
         </VBox>
-    </center>
-</BorderPane>
+
+        <!-- Pets -->
+        <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
+            <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+            <Label text="Pets cadastrados" styleClass="card-titulo"/>
+            <Label fx:id="petsLabel" text="0" styleClass="card-valor"/>
+        </VBox>
+
+        <!-- Serviços ativos -->
+        <VBox styleClass="card" spacing="6" HBox.hgrow="ALWAYS">
+            <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+            <Label text="Serviços ativos" styleClass="card-titulo"/>
+            <Label fx:id="servicosAtivosLabel" text="0" styleClass="card-valor"/>
+        </VBox>
+    </HBox>
+</VBox>

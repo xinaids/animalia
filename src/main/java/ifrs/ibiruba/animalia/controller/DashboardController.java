@@ -4,13 +4,12 @@ import ifrs.ibiruba.animalia.repository.AgendamentoRepository;
 import ifrs.ibiruba.animalia.repository.PetRepository;
 import ifrs.ibiruba.animalia.repository.ServicoRepository;
 import ifrs.ibiruba.animalia.repository.TutorRepository;
-import ifrs.ibiruba.animalia.util.Navegacao;
 import ifrs.ibiruba.animalia.util.Sessao;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 
+/** Módulo Dashboard (área central da janela principal). Menu e sidebar ficam no PrincipalController. */
 public class DashboardController {
 
     @FXML private Label     saudacaoLabel;
@@ -18,7 +17,6 @@ public class DashboardController {
     @FXML private Label     tutoresLabel;
     @FXML private Label     petsLabel;
     @FXML private Label     servicosAtivosLabel;
-    @FXML private MenuItem  menuSair;
 
     private final SimpleIntegerProperty agendamentosHoje  = new SimpleIntegerProperty(0);
     private final SimpleIntegerProperty totalTutores      = new SimpleIntegerProperty(0);
@@ -59,16 +57,5 @@ public class DashboardController {
         if (Sessao.getInstance().estaAtiva()) {
             saudacaoLabel.setText("Bem-vindo, " + Sessao.getInstance().getUsuario().getNome() + "!");
         }
-    }
-
-    @FXML
-    private void sair() {
-        Sessao.getInstance().encerrar();
-        Navegacao.irPara("login.fxml", "Animalia — Login", 400, 500);
-    }
-
-    @FXML
-    private void emConstrucao() {
-        Navegacao.irPara("construcao.fxml", "Animalia — Em construção");
     }
 }
