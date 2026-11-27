@@ -45,7 +45,7 @@ public class LoginController {
                 senhaField.getText()
             );
             Sessao.getInstance().iniciar(usuario);
-            Navegacao.irPara("dashboard.fxml", "Animalia — Dashboard", 900, 600);
+            Navegacao.abrirAreaPrincipal();
         } catch (IllegalArgumentException e) {
             mensagemLabel.setText(e.getMessage());
         }

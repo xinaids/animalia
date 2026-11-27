@@ -1,5 +1,6 @@
 package ifrs.ibiruba.animalia.repository;
 
+import ifrs.ibiruba.animalia.persistencia.ExclusaoBloqueadaException;
 import ifrs.ibiruba.animalia.persistencia.Persistencia;
 import ifrs.ibiruba.animalia.persistencia.RepositorioException;
 import jakarta.persistence.EntityManager;
@@ -56,15 +57,50 @@ public abstract class BaseRepository<T, ID> {
         }
     }
 
+    /**
+     * Verifica se o registro pode ser excluído.
+     *
+     * @return o motivo do bloqueio (mensagem para o usuário) ou vazio se a exclusão é permitida.
+     */
+    public Optional<String> verificarExclusao(ID id) {
+        EntityManager em = abrirEm();
+        try {
+            return motivoBloqueioExclusao(em, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Ponto de extensão: subclasses informam por que um registro não pode ser excluído
+     * (ex.: possui registros dependentes). Padrão: nenhum bloqueio.
+     */
+    protected Optional<String> motivoBloqueioExclusao(EntityManager em, ID id) {
+        return Optional.empty();
+    }
+
+    /**
+     * Exclui o registro. Não há exclusão em cascata: se existirem vínculos,
+     * lança {@link ExclusaoBloqueadaException} e nada é removido.
+     */
     public void excluir(ID id) {
         EntityManager em = abrirEm();
         try {
             em.getTransaction().begin();
+            Optional<String> bloqueio = motivoBloqueioExclusao(em, id);
+            if (bloqueio.isPresent()) {
+                throw new ExclusaoBloqueadaException(bloqueio.get());
+            }
             T entidade = em.find(tipo, id);
             if (entidade != null) {
                 em.remove(entidade);
             }
             em.getTransaction().commit();
+        } catch (ExclusaoBloqueadaException e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
@@ -73,6 +109,13 @@ public abstract class BaseRepository<T, ID> {
         } finally {
             em.close();
         }
+    }
+
+    /** Executa uma contagem JPQL com um único parâmetro ":id". */
+    protected long contarVinculos(EntityManager em, String jpql, ID id) {
+        return em.createQuery(jpql, Long.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
     }
 
     public long contar() {

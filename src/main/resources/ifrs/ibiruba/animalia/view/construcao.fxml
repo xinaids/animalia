@@ -7,8 +7,8 @@
       fx:controller="ifrs.ibiruba.animalia.controller.ConstrucaoController"
       alignment="CENTER"
       spacing="16"
-      styleClass="root"
       stylesheets="@../css/animalia.css">
+    <!-- Módulo exibido na área central de principal.fxml -->
 
     <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
 

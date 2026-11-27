@@ -31,7 +31,7 @@ Desenvolver uma aplicação desktop para controle de agendamentos de serviços d
 ### Próxima etapa
 - [ ] CRUD de Tutores
 - [ ] CRUD de Pets
-- [ ] CRUD de Serviços
+- [x] CRUD de Serviços (listagem com busca, cadastro, edição, ativar/desativar e exclusão protegida)
 - [ ] Fluxo de agendamento (criar, editar, cancelar, concluir)
 - [ ] Dashboard completo com filtros por período
 

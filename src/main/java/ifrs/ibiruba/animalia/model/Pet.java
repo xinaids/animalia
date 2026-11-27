@@ -29,7 +29,8 @@ public class Pet {
     @JoinColumn(name = "tutor_id", nullable = false)
     private Tutor tutor;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Sem cascade/orphanRemoval: a exclusão do pet é bloqueada enquanto houver agendamentos.
+    @OneToMany(mappedBy = "pet")
     private List<Agendamento> agendamentos = new ArrayList<>();
 
     public Long getId()                      { return id; }
