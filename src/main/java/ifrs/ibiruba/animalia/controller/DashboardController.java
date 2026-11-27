@@ -10,9 +10,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.net.URL;
 
 public class DashboardController {
 
+    private static final String CAMINHO_LOGO = "/ifrs/ibiruba/animalia/imagens/animalia-logo.png";
+
+    @FXML private ImageView logoImageView;
     @FXML private Label     saudacaoLabel;
     @FXML private Label     agendamentosHojeLabel;
     @FXML private Label     tutoresLabel;
@@ -32,9 +39,19 @@ public class DashboardController {
 
     @FXML
     public void initialize() {
+        carregarLogo();
         configurarBindings();
         carregarDados();
         configurarSaudacao();
+    }
+
+    private void carregarLogo() {
+        URL recurso = getClass().getResource(CAMINHO_LOGO);
+        if (recurso == null) {
+            System.err.println("[DashboardController] Logo não encontrada no classpath: " + CAMINHO_LOGO);
+            return;
+        }
+        logoImageView.setImage(new Image(recurso.toExternalForm()));
     }
 
     private void configurarBindings() {

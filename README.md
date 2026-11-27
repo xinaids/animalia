@@ -65,7 +65,8 @@ animalia/
 │   │       ├── META-INF/persistence.xml    Configuração JPA
 │   │       └── ifrs/ibiruba/animalia/
 │   │           ├── view/                   Arquivos FXML
-│   │           └── css/animalia.css        Estilo JavaFX
+│   │           ├── css/animalia.css        Estilo JavaFX
+│   │           └── imagens/               Imagens estáticas (logo, ícones)
 │   └── test/java/ifrs/ibiruba/animalia/   Testes JUnit 5
 ├── docs/
 │   ├── diagrama-classes.mmd               Fonte Mermaid

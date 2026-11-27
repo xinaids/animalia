@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
@@ -51,6 +52,14 @@
     <center>
         <VBox spacing="24">
             <padding><Insets top="28" right="32" bottom="28" left="32"/></padding>
+
+            <!-- Logo da marca — exibida apenas no Dashboard -->
+            <HBox alignment="CENTER" styleClass="logo-container">
+                <ImageView fx:id="logoImageView"
+                           fitWidth="420"
+                           preserveRatio="true"
+                           smooth="true"/>
+            </HBox>
 
             <VBox spacing="4">
                 <Label fx:id="saudacaoLabel" text="Bem-vindo!" styleClass="titulo"/>
